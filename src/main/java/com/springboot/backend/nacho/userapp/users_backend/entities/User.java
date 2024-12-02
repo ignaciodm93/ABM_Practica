@@ -6,27 +6,38 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name  = "users")
 public class User {
-
+	//video 138
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@NotBlank
 	@Column(name = "name")
 	private String name;
 	
+	@NotBlank
 	@Column(name = "lastname")
 	private String lastname;
 	
+	@NotBlank
+	@Email
 	@Column(name = "email")
 	private String email;
 
+	@NotBlank
+	@Size(min=4, max=12)
 	@Column(name = "username")
 	private String username;
 
+	@NotBlank
 	@Column(name = "password")
 	private String password;
 
