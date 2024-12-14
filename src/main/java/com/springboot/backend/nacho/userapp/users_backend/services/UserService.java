@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.lang.NonNull;
 
 import com.springboot.backend.nacho.userapp.users_backend.entities.User;
+import com.springboot.backend.nacho.userapp.users_backend.entities.UserRequest;
 
 public interface UserService {
 	
@@ -20,4 +21,6 @@ public interface UserService {
 	void deleteById(Long id);
 	
 	Page<User> findAll(Pageable pageable);
+	
+	Optional<User> update(UserRequest user, Long id);
 }
