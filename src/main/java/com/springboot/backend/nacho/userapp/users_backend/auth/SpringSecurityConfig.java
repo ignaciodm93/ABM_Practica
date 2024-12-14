@@ -60,23 +60,24 @@ public class SpringSecurityConfig {
 	}
 
 	@Bean
-	CorsConfigurationSource configurationSource() {
-		CorsConfiguration corsConfig = new CorsConfiguration();
-		corsConfig.setAllowedOriginPatterns(Arrays.asList("*"));
-		corsConfig.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
-		corsConfig.setAllowedMethods(Arrays.asList("POST", "GET", "PUT", "DELETE"));
-		corsConfig.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
-		corsConfig.setAllowCredentials(true);
+    CorsConfigurationSource configurationSource() {
+        CorsConfiguration config = new CorsConfiguration();
+        config.setAllowedOriginPatterns(Arrays.asList("*"));
+        config.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
+        config.setAllowedMethods(Arrays.asList("POST", "GET", "PUT", "DELETE"));
+        config.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
+        config.setAllowCredentials(true);
 
-		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-		source.registerCorsConfiguration("/**", corsConfig);
-		return source;
-	}
-	
-	@Bean
-	FilterRegistrationBean<CorsFilter> corsFilter() {
-		FilterRegistrationBean<CorsFilter> corsBean = new FilterRegistrationBean<CorsFilter>(new CorsFilter(this.configurationSource()), null);
-		corsBean.setOrder(Ordered.HIGHEST_PRECEDENCE);
-		return corsBean;
-	}
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", config);
+        return source;
+    }
+
+    @Bean
+    FilterRegistrationBean<CorsFilter> corsFilter() {
+        FilterRegistrationBean<CorsFilter> corsBean = new FilterRegistrationBean<CorsFilter>(
+                new CorsFilter(this.configurationSource()));
+        corsBean.setOrder(Ordered.HIGHEST_PRECEDENCE);
+        return corsBean;
+    }
 }
